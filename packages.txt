@@ -1,6 +1,6 @@
-libodbc2
-libodbcinst2
-unixodbc-common
-odbcinst1debian2
-libodbc1
-odbcinst
+gdal-bin
+libgdal-dev
+libgeos-dev
+libproj-dev
+unixodbc
+unixodbc-dev
