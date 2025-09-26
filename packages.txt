@@ -1,9 +1,6 @@
-libgdal32
-libgdal-dev
-gdal-bin
-libgeos-dev
-libproj-dev
 libodbc2
 libodbcinst2
 unixodbc-common
-sensible-utils
+odbcinst1debian2
+libodbc1
+odbcinst
