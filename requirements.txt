@@ -8,3 +8,5 @@ gdal==3.6.0
 pyproj
 opencage
 python-dateutil
+numpy>=1.26.0
+scikit-learn
