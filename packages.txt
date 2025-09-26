@@ -1,7 +1,9 @@
+aptitude
 libgdal32
-gdal-bin
 libgdal-dev
+gdal-bin
 libgeos-dev
 libproj-dev
 libodbc2
 libodbcinst2
+unixodbc-common
