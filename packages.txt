@@ -1,4 +1,3 @@
-aptitude
 libgdal32
 libgdal-dev
 gdal-bin
@@ -7,3 +6,4 @@ libproj-dev
 libodbc2
 libodbcinst2
 unixodbc-common
+sensible-utils
