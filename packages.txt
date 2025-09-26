@@ -1,6 +1,7 @@
-libgdal-dev
+libgdal32
 gdal-bin
+libgdal-dev
 libgeos-dev
 libproj-dev
-libodbc1
-odbcinst1debian2
+libodbc2
+libodbcinst2
