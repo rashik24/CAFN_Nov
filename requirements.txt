@@ -1,9 +1,10 @@
-geopandas
 streamlit
-pydeck
 pandas
-numpy
+pydeck
+geopandas
+shapely
+fiona
+gdal==3.6.0
+pyproj
 opencage
 python-dateutil
-geopy
-shapely
