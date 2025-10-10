@@ -42,7 +42,7 @@ if mode == "Address":
             if results:
                 user_lat = results[0]["geometry"]["lat"]
                 user_lon = results[0]["geometry"]["lng"]
-                st.success(f"Geocoded location: {user_lat:.5f}, {user_lon:.5f}")
+                #st.success(f"Geocoded location: {user_lat:.5f}, {user_lon:.5f}")
             else:
                 st.error("Could not geocode your address.")
                 st.stop()
@@ -70,7 +70,7 @@ if mode == "Address" and user_lat is not None and user_lon is not None:
     matched_tract = tracts_gdf[tracts_gdf.contains(user_point)]
     if not matched_tract.empty:
         user_geoid = matched_tract.iloc[0]["GEOID"]
-        st.success(f"Matched your location to GEOID {user_geoid}")
+        #st.success(f"Matched your location to GEOID {user_geoid}")
     else:
         st.error("Could not match your location to a census tract.")
         st.stop()
@@ -139,7 +139,7 @@ if not filtered_df.empty:
     filtered_df["total_traveltime"] = filtered_df["total_traveltime"].round(2)
     filtered_df["total_miles"] = filtered_df["total_miles"].round(2)
 
-    st.success(f"{len(filtered_df)} pantries match your filters.")
+    #st.success(f"{len(filtered_df)} pantries match your filters.")
     if mode == "ZIP Code":
         display_cols = ["agency name", "address", "operating hours"]
         unique_df = filtered_df.drop_duplicates(subset=["agency name"])
