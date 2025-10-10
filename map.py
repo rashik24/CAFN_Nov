@@ -6,6 +6,8 @@ try:
 except ImportError:
     import geopandas_lite as gpd
 
+gpd.options.io_engine = "pyogrio"   # ✅ ensures no Fiona/GDAL dependency
+
 from shapely.geometry import Point
 from datetime import datetime, time
 from opencage.geocoder import OpenCageGeocode
