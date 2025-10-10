@@ -83,16 +83,30 @@ elif mode == "ZIP Code" and zip_code:
     user_geoid = None
 
 
+# 👇 Ask user for preferred travel time threshold
+user_threshold = st.number_input(
+    "Enter travel time threshold (minutes):",
+    min_value=5, max_value=120, value=20, step=5,
+    help="Agencies within this travel time will be considered nearby."
+)
+
+# 👇 Now use that value dynamically
 if user_geoid is not None:
     agencies_nearby = odm_df[
         (odm_df["geoid"] == user_geoid) &
-        (odm_df["total_traveltime"] <= 20)
+        (odm_df["total_traveltime"] <= user_threshold)
     ]
+
     if agencies_nearby.empty:
-        st.warning("No agencies linked to your tract. Searching all nearby agencies instead.")
-        agencies_nearby = odm_df[odm_df["total_traveltime"] <= 60]
+        st.warning(
+            f"No agencies linked to your tract within {user_threshold} minutes. "
+            "Searching all nearby agencies instead."
+        )
+        # Fallback: extend the search window automatically (e.g., +40 min)
+        agencies_nearby = odm_df[odm_df["total_traveltime"] <= (user_threshold + 40)]
 else:
     agencies_nearby = odm_df
+
 
 # 🚨 FILTER SECTION ────────────────────────────────────────────────────
 df = agencies_nearby.copy()
