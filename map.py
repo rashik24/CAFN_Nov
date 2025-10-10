@@ -1,7 +1,11 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
-import geopandas as gpd
+try:
+    import geopandas as gpd
+except ImportError:
+    import geopandas_lite as gpd
+
 from shapely.geometry import Point
 from datetime import datetime, time
 from opencage.geocoder import OpenCageGeocode
