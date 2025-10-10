@@ -212,3 +212,88 @@ if not filtered_df.empty:
     st.pydeck_chart(deck)
 else:
     st.warning("No agencies found matching your filters.")
+import streamlit as st
+import pandas as pd
+import gspread
+from google.oauth2.service_account import Credentials
+from datetime import datetime
+
+st.title("🍎 Food Finder Feedback Form")
+st.write("Help us make the Food Finder app better! This quick form takes less than 2 minutes. 💬")
+
+# Load credentials from Streamlit Secrets
+try:
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=["https://www.googleapis.com/auth/spreadsheets"]
+    )
+    client = gspread.authorize(creds)
+    SHEET_ID = st.secrets["google_sheet"]["sheet_id"]
+    sheet = client.open_by_key(SHEET_ID).sheet1
+    connected = True
+except Exception as e:
+    connected = False
+    st.error("⚠️ Could not connect to Google Sheets. Please check your credentials.")
+    st.write(e)
+
+# 1️⃣ About Experience
+st.subheader("🧭 1. About Your Experience")
+usage = st.radio("How often do you use the Food Finder app?", 
+                 ["Daily", "Weekly", "Occasionally", "This is my first time"])
+ease = st.radio("How easy is it to find what you’re looking for?",
+                ["Very easy", "Somewhat easy", "Neutral", "A bit confusing", "Very hard"])
+helpful = st.radio("Did the app help you find food resources near you?",
+                   ["Yes, completely", "Partially", "No"])
+
+# 2️⃣ What’s Not Working
+st.subheader("🐞 2. What’s Not Working")
+issues = st.checkbox("I faced issues or errors")
+issue_details = st.text_area("If yes, please describe briefly:", "") if issues else ""
+problems = st.multiselect(
+    "Were any of the following frustrating?",
+    ["Slow loading or map not showing",
+     "Wrong or missing pantry info",
+     "App crashed or froze",
+     "Couldn’t filter by time or location",
+     "Couldn’t contact agencies",
+     "Other"]
+)
+
+# 3️⃣ What Could Be Better
+st.subheader("🌟 3. What Could Be Better")
+features = st.multiselect(
+    "What new features or updates would you like to see?",
+    ["Better map accuracy",
+     "Live pantry hours or status updates",
+     "Directions or travel time",
+     "Save favorite locations",
+     "Add reviews or feedback on pantries",
+     "Other"]
+)
+satisfaction = st.slider("How satisfied are you overall with the app?", 1, 5, 3)
+
+# 4️⃣ Additional Feedback
+st.subheader("💡 4. Anything Else?")
+comments = st.text_area("Any other thoughts, ideas, or frustrations?")
+contact_opt = st.checkbox("I’d like to be contacted about updates")
+email = st.text_input("Enter your email (optional):") if contact_opt else ""
+
+# Submit
+if st.button("📤 Submit Feedback"):
+    feedback = [
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        usage, ease, helpful, issues, issue_details,
+        ", ".join(problems), ", ".join(features),
+        satisfaction, comments, email
+    ]
+
+    if connected:
+        try:
+            sheet.append_row(feedback)
+            st.success("✅ Thank you! Your feedback has been recorded successfully.")
+        except Exception as e:
+            st.error("⚠️ Failed to save to Google Sheets.")
+            st.write(e)
+    else:
+        st.warning("⚠️ Could not connect to Google Sheets. Your feedback wasn’t saved.")
+
