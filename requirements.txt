@@ -4,7 +4,7 @@ pydeck>=0.8
 opencage>=2.4
 python-dateutil>=2.8
 shapely==2.0.3
-fiona==1.9.5
+fiona==1.9.6.post1
 pyproj==3.6.1
 rtree==1.2.0
 geopandas==0.14.4
