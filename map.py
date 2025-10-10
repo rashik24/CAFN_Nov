@@ -218,8 +218,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
-st.title("🍎 Food Finder Feedback Form")
-st.write("Help us make the Food Finder app better! This quick form takes less than 2 minutes. 💬")
+st.title("🍎 Food Locator Feedback Form")
+st.write("Help us make the Food Locator app better! This quick form takes less than 2 minutes. 💬")
 
 # Load credentials from Streamlit Secrets
 try:
@@ -238,7 +238,7 @@ except Exception as e:
 
 # 1️⃣ About Experience
 st.subheader("🧭 1. About Your Experience")
-usage = st.radio("How often do you use the Food Finder app?", 
+usage = st.radio("How often do you use the Food Locator app?", 
                  ["Daily", "Weekly", "Occasionally", "This is my first time"])
 ease = st.radio("How easy is it to find what you’re looking for?",
                 ["Very easy", "Somewhat easy", "Neutral", "A bit confusing", "Very hard"])
