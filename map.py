@@ -13,6 +13,21 @@ from datetime import datetime, time
 from opencage.geocoder import OpenCageGeocode
 from dateutil import parser
 import os
+import streamlit as st
+import gspread
+from google.oauth2.service_account import Credentials
+
+try:
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=["https://www.googleapis.com/auth/spreadsheets"]
+    )
+    client = gspread.authorize(creds)
+    sheet = client.open_by_key(st.secrets["google_sheet"]["sheet_id"]).sheet1
+    st.success(f"✅ Connected to Google Sheet: {sheet.title}")
+except Exception as e:
+    st.error("❌ Still not connected.")
+    st.write(e)
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────
 
