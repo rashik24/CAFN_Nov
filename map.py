@@ -16,6 +16,20 @@ import os
 import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=["https://www.googleapis.com/auth/spreadsheets.readonly",
+            "https://www.googleapis.com/auth/drive.readonly"]
+)
+client = gspread.authorize(creds)
+
+try:
+    files = client.list_spreadsheet_files()
+    st.write("🔍 Service account can see these spreadsheets:")
+    st.write(files)
+except Exception as e:
+    st.error("Drive access test failed")
+    st.write(e)
 
 try:
     creds = Credentials.from_service_account_info(
