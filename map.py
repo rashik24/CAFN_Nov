@@ -47,7 +47,7 @@ client = gspread.authorize(creds)
 
 # Set your Mapbox token as environment variable
 os.environ["MAPBOX_API_KEY"] = "pk.eyJ1IjoicnNpZGRpcTIiLCJhIjoiY21nMTRkZ21nMGptNzJrb2phOWpyMmpvZiJ9.qbQ-Pn8jaPA7ABdccrTXsg"
-
+#pk.eyJ1IjoicnNpZGRpcTIiLCJhIjoiY21nMTRkZ21nMGptNzJrb2phOWpyMmpvZiJ9.qbQ-Pn8jaPA7ABdccrTXsg
 HOURS_CSV = "fbcenc_hourly.csv"
 ODM_CSV = "ODM_CAFN_2.csv"
 TRACTS_SHP = "cb_2023_37_tract_500k.shp"
