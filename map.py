@@ -23,25 +23,25 @@ creds = Credentials.from_service_account_info(
 )
 client = gspread.authorize(creds)
 
-try:
-    files = client.list_spreadsheet_files()
-    st.write("🔍 Service account can see these spreadsheets:")
-    st.write(files)
-except Exception as e:
-    st.error("Drive access test failed")
-    st.write(e)
+# try:
+#     files = client.list_spreadsheet_files()
+#     st.write("🔍 Service account can see these spreadsheets:")
+#     st.write(files)
+# except Exception as e:
+#     st.error("Drive access test failed")
+#     st.write(e)
 
-try:
-    creds = Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=["https://www.googleapis.com/auth/spreadsheets"]
-    )
-    client = gspread.authorize(creds)
-    sheet = client.open_by_key(st.secrets["google_sheet"]["sheet_id"]).sheet1
-    st.success(f"✅ Connected to Google Sheet: {sheet.title}")
-except Exception as e:
-    st.error("❌ Still not connected.")
-    st.write(e)
+# try:
+#     creds = Credentials.from_service_account_info(
+#         st.secrets["gcp_service_account"],
+#         scopes=["https://www.googleapis.com/auth/spreadsheets"]
+#     )
+#     client = gspread.authorize(creds)
+#     sheet = client.open_by_key(st.secrets["google_sheet"]["sheet_id"]).sheet1
+#     st.success(f"✅ Connected to Google Sheet: {sheet.title}")
+# except Exception as e:
+#     st.error("❌ Still not connected.")
+#     st.write(e)
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────
 
@@ -248,7 +248,8 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 
 st.title("🍎 Food Locator Feedback Form")
-st.write("Help us make the Food Locator app better! This quick form takes less than 2 minutes. 💬")
+st.markdown("<h3>💬 Help us make the <b>Food Locator</b> app better! This quick form takes less than 2 minutes.</h3>", unsafe_allow_html=True)
+
 
 # Load credentials from Streamlit Secrets
 try:
