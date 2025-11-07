@@ -55,6 +55,7 @@ client_ro = gspread.authorize(creds_ro)
 # ───────────────────────────────────────────────────────────────────────
 # fbcenc_hourly
 hourly_df = pd.read_csv(HOURS_CSV)
+hourly_df=hourly_df[hourly_df['day']!='Ist']
 hourly_df.columns = hourly_df.columns.str.strip().str.lower()
 # Normalize day to Title case (e.g., Monday)
 hourly_df["day"] = hourly_df["day"].astype(str).str.strip().str.title()
