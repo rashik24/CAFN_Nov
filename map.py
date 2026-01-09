@@ -27,8 +27,8 @@ st.title("CAFN Food Finder")
 # Set your Mapbox token as environment variable
 os.environ["MAPBOX_API_KEY"] = "pk.eyJ1IjoicnNpZGRpcTIiLCJhIjoiY21nMTRkZ21nMGptNzJrb2phOWpyMmpvZiJ9.qbQ-Pn8jaPA7ABdccrTXsg"
 
-HOURS_CSV   = "fbcenc_hourly.csv"              # columns: agency,city,address,week,day,hour,window,Name,Latitude,Longitude
-ODM_CSV     = "ODM_CAFN_2.csv"                 # your precomputed travel times & filters
+HOURS_CSV   = "cafn_hourly.csv"              # columns: agency,city,address,week,day,hour,window,Name,Latitude,Longitude
+ODM_CSV     = "ODM CAFN 2.csv"                 # your precomputed travel times & filters
 TRACTS_SHP  = "cb_2023_37_tract_500k.shp"
 OPENCAGE_API_KEY = "f53bdda785074d5499b7a4d29d5acd1f"   # (from your code)
 geocoder = OpenCageGeocode(OPENCAGE_API_KEY)
