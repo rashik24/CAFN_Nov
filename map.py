@@ -184,15 +184,15 @@ if show_choice_only and "choice" in filtered_df.columns:
 # ───────────────────────────────────────────────────────────────────────
 st.markdown("### 🏛️ Filter by County")
 
-if "county" in filtered_df.columns:
+if "County" in filtered_df.columns:
     # normalize (optional but helpful)
-    filtered_df["county"] = filtered_df["county"].astype(str).str.strip()
+    filtered_df["County"] = filtered_df["County"].astype(str).str.strip()
 
-    county_vals = sorted(filtered_df["county"].dropna().unique())
+    county_vals = sorted(filtered_df["County"].dropna().unique())
     selected_counties = st.multiselect("Select county/countyies", county_vals)
 
     if selected_counties:
-        filtered_df = filtered_df[filtered_df["county"].isin(selected_counties)]
+        filtered_df = filtered_df[filtered_df["County"].isin(selected_counties)]
 else:
     st.info("No 'county' column found; county filter skipped.")
 # ───────────────────────────────────────────────────────────────────────
@@ -204,7 +204,7 @@ show_hispanic_only = st.checkbox("Show only pantries that speak Spanish/Hispanic
 
 if show_hispanic_only:
     if "hispanic" in filtered_df.columns:
-        filtered_df["hispanic"] = pd.to_numeric(filtered_df["hispanic"], errors="coerce").fillna(0).astype(int)
+        filtered_df["Hispanic"] = pd.to_numeric(filtered_df["Hispanic"], errors="coerce").fillna(0).astype(int)
         filtered_df = filtered_df[filtered_df["hispanic"] == 1]
     else:
         st.info("No 'hispanic' column found; Hispanic filter skipped.")
