@@ -179,6 +179,35 @@ if not filtered_df.empty and "filter_2" in filtered_df.columns:
 
 if show_choice_only and "choice" in filtered_df.columns:
     filtered_df = filtered_df[filtered_df["choice"] == 1]
+# ───────────────────────────────────────────────────────────────────────
+# NEW: COUNTY FILTER
+# ───────────────────────────────────────────────────────────────────────
+st.markdown("### 🏛️ Filter by County")
+
+if "county" in filtered_df.columns:
+    # normalize (optional but helpful)
+    filtered_df["county"] = filtered_df["county"].astype(str).str.strip()
+
+    county_vals = sorted(filtered_df["county"].dropna().unique())
+    selected_counties = st.multiselect("Select county/countyies", county_vals)
+
+    if selected_counties:
+        filtered_df = filtered_df[filtered_df["county"].isin(selected_counties)]
+else:
+    st.info("No 'county' column found; county filter skipped.")
+# ───────────────────────────────────────────────────────────────────────
+# NEW: HISPANIC OPTION (checkbox)
+# ───────────────────────────────────────────────────────────────────────
+st.markdown("### 🗣️ Language Support")
+
+show_hispanic_only = st.checkbox("Show only pantries that speak Spanish/Hispanic", value=False)
+
+if show_hispanic_only:
+    if "hispanic" in filtered_df.columns:
+        filtered_df["hispanic"] = pd.to_numeric(filtered_df["hispanic"], errors="coerce").fillna(0).astype(int)
+        filtered_df = filtered_df[filtered_df["hispanic"] == 1]
+    else:
+        st.info("No 'hispanic' column found; Hispanic filter skipped.")
 
 # ───────────────────────────────────────────────────────────────────────
 # NEW: DAY-ONLY FILTER (from fbcenc_hourly.csv)
