@@ -144,6 +144,7 @@ if user_geoid is not None:
         agencies_nearby = odm_df[odm_df["total_traveltime"] <= (user_threshold + 40)]
 else:
     agencies_nearby = odm_df
+st.write("agencies_nearby columns:", list(agencies_nearby.columns))
 
 df = agencies_nearby.copy()
 df = df.merge(
@@ -152,7 +153,7 @@ df = df.merge(
     right_on='agency no.',
     how='left'
 )
-
+st.write("DF columns:", list(df.columns))
 # ───────────────────────────────────────────────────────────────────────
 # CORE FILTERS (Choice + Filter1 + Filter2) — unchanged
 # ───────────────────────────────────────────────────────────────────────
@@ -214,7 +215,7 @@ else:
 st.markdown("### 🗣️ Language Support")
 
 show_hispanic_only = st.checkbox("Show only pantries that speak Spanish/Hispanic", value=False)
-
+st.write("filtered_df columns:", list(filtered_df.columns))
 if show_hispanic_only:
     if "hispanic" in filtered_df.columns:
         filtered_df["hispanic"] = pd.to_numeric(filtered_df["hispanic"], errors="coerce").fillna(0).astype(int)
