@@ -192,15 +192,15 @@ if show_choice_only and "choice" in filtered_df.columns:
 # ───────────────────────────────────────────────────────────────────────
 st.markdown("### 🏛️ Filter by County")
 
-if "County" in filtered_df.columns:
+if "county" in filtered_df.columns:
     # normalize (optional but helpful)
-    filtered_df["County"] = filtered_df["County"].astype(str).str.strip()
+    filtered_df["county"] = filtered_df["county"].astype(str).str.strip()
 
-    county_vals = sorted(filtered_df["County"].dropna().unique())
-    selected_counties = st.multiselect("Select county/countyies", county_vals)
+    county_vals = sorted(filtered_df["county"].dropna().unique())
+    selected_counties = st.multiselect("Select county/counties", county_vals)
 
     if selected_counties:
-        filtered_df = filtered_df[filtered_df["County"].isin(selected_counties)]
+        filtered_df = filtered_df[filtered_df["county"].isin(selected_counties)]
 else:
     st.info("No 'county' column found; county filter skipped.")
 # ───────────────────────────────────────────────────────────────────────
