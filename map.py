@@ -66,6 +66,11 @@ hourly_df["agency"] = hourly_df["name"].astype(str).str.strip()
 # odm travel-time/categorized dataset
 odm_df = pd.read_csv(ODM_CSV)
 odm_df.columns = odm_df.columns.str.strip().str.lower()
+odm_df.columns = odm_df.columns.str.strip().str.lower()
+
+if "county" in odm_df.columns:
+    odm_df = odm_df.drop(columns=["county"])
+
 # normalize columns used for joining/filters
 odm_df["agency name"] = odm_df["agency name"].astype(str).str.strip()
 odm_df["address"] = odm_df["address"].astype(str).str.strip()
