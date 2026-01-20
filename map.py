@@ -144,7 +144,7 @@ if user_geoid is not None:
         agencies_nearby = odm_df[odm_df["total_traveltime"] <= (user_threshold + 40)]
 else:
     agencies_nearby = odm_df
-st.write("agencies_nearby columns:", list(agencies_nearby.columns))
+st.write("agencies columns:", list(agencies.columns))
 
 df = agencies_nearby.copy()
 df = df.merge(
