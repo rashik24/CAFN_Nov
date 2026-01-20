@@ -212,7 +212,7 @@ show_hispanic_only = st.checkbox("Show only pantries that speak Spanish/Hispanic
 
 if show_hispanic_only:
     if "hispanic" in filtered_df.columns:
-        filtered_df["Hispanic"] = pd.to_numeric(filtered_df["Hispanic"], errors="coerce").fillna(0).astype(int)
+        filtered_df["hispanic"] = pd.to_numeric(filtered_df["hispanic"], errors="coerce").fillna(0).astype(int)
         filtered_df = filtered_df[filtered_df["hispanic"] == 1]
     else:
         st.info("No 'hispanic' column found; Hispanic filter skipped.")
