@@ -9,3 +9,4 @@ opencage>=2.4
 python-dateutil>=2.8
 gspread
 google-auth
+openpyxl
