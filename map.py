@@ -32,7 +32,9 @@ ODM_CSV     = "ODM CAFN 2.csv"                 # your precomputed travel times &
 TRACTS_SHP  = "cb_2023_37_tract_500k.shp"
 OPENCAGE_API_KEY = "f53bdda785074d5499b7a4d29d5acd1f"   # (from your code)
 geocoder = OpenCageGeocode(OPENCAGE_API_KEY)
-agencies=  pd.read_excel('CAFN Dec 2025.xlsx')
+agencies = pd.read_excel("CAFN Dec 2025.xlsx")
+agencies.columns = agencies.columns.str.strip().str.lower()
+
 # ───────────────────────────────────────────────────────────────────────
 # INPUT MODE (Address vs ZIP)
 # ───────────────────────────────────────────────────────────────────────
@@ -139,7 +141,13 @@ else:
     agencies_nearby = odm_df
 
 df = agencies_nearby.copy()
-df= df.merge(agencies[['Agency No.','Hispanic','County']], left='Agency No.', right_on='Agency No.', how='left')
+df = df.merge(
+    agencies[['agency no.', 'hispanic', 'county']],
+    left_on='agency no.',
+    right_on='agency no.',
+    how='left'
+)
+
 # ───────────────────────────────────────────────────────────────────────
 # CORE FILTERS (Choice + Filter1 + Filter2) — unchanged
 # ───────────────────────────────────────────────────────────────────────
